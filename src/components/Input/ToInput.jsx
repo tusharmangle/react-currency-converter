@@ -3,7 +3,7 @@ import React from 'react'
 const FromInput = ({currencies,setToHandler, to}) => {
 
     if(currencies.length === 0){
-        return 
+        return ""
     }
     return (
             <form className="px-5" action="">
