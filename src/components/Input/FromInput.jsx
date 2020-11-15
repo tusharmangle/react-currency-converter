@@ -3,7 +3,7 @@ import React from 'react'
 const FromInput = ({currencies,setFromHandler, from}) => {
 
     if(currencies.length === 0){
-        return "Loading....."
+        return
     }
     return (
             <form className="px-5">
