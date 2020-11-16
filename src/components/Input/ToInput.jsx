@@ -9,6 +9,7 @@ const FromInput = ({currencies,setToHandler, to}) => {
     return (
             <form className="px-5" action="">
                 <Select
+                className="font-semibold text-gray-600"
                     value={to}
                     onChange={setToHandler}
                     options={currencies}

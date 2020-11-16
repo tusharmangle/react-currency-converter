@@ -7,8 +7,8 @@ import "./styles/tailwind.css";
 class App extends Component {
   state = {
     currencies: [],
-    to: { value: "USD", label: "United States Dollar" },
-    from: { value: "INR", label: "Indian Rupee" },
+    to: { value: "", label: "To" },
+    from: { value: "", label: "From" },
     amount: "",
     result: 0,
     converting: false,

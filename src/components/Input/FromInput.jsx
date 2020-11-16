@@ -9,6 +9,7 @@ const FromInput = ({currencies,setFromHandler, from}) => {
     return (
             <form className="px-5">
                 <Select
+                autoFocus={true}
                 className="font-semibold text-gray-600"
                     value={from}
                     onChange={setFromHandler}
