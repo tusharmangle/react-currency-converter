@@ -4,7 +4,7 @@ const url = "https://free.currencyconverterapi.com/api/v6";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const getCurruncies = async () => {
-  const currencies = localStorage.getItem("currencies");
+  const currencies = localStorage.getItem("formatted_currencies");
   if (currencies) {
     const response = JSON.parse(currencies);
     return response;
@@ -15,7 +15,7 @@ export const getCurruncies = async () => {
       return { value: currency.id, label: currency.currencyName };
     }
   );
-  localStorage.setItem("currencies", JSON.stringify(formattedValues));
+  localStorage.setItem("formatted_currencies", JSON.stringify(formattedValues));
   console.log("Formatted Values", formattedValues);
 
   return formattedValues;
