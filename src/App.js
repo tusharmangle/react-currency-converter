@@ -7,8 +7,8 @@ import "./styles/tailwind.css";
 class App extends Component {
   state = {
     currencies: [],
-    to: "INR",
-    from: "USD",
+    to: "",
+    from: "",
     amount: null,
     result: 0,
     converting: false,
@@ -49,7 +49,7 @@ class App extends Component {
   }
   handleDisable = () => {
     let classname =
-      "bg-blue-600 text-white px-8 py-2 rounded-lg text-lg font-semibold uppercase focus:outline-none ";
+      "bg-blue-600 text-white px-8 py-2 rounded tracking-wide text-lg font-semibold uppercase focus:outline-none ";
     const { amount } = this.state;
     return Number(amount) === 0
       ? `${classname} opacity-50 cursor-not-allowed`
@@ -62,22 +62,36 @@ class App extends Component {
       <>
         <div className="flex flex-col  text-center my-12">
           <div className="text-5xl font-bold text-gray-700">
-            Curr<span className="text-red-600">convert</span>
+            Curr<span className="text-red-600">converter</span>
           </div>
           <div className="text-gray-700 text-lg">
             Convert currencies across the globe
           </div>
         </div>
 
-        <div className="container mx-auto flex flex-col sm:flex-row flex-wrap">
-          <div className="sm:w-1/2 my-2">
+        <div className="container mx-auto flex flex-col sm:flex-row flex-wrap items-center">
+          <div className="sm:flex-1 my-2">
             <FromInput
               currencies={currencies}
               from={from}
               setFromHandler={this.setFrom}
             ></FromInput>
           </div>
-          <div className="sm:w-1/2 my-2">
+          <div className="flex justify-center my-4">
+            <svg
+              onClick={() => this.alterParams()}
+              className="w-10 h-10 cursor-pointer bg-red-600 p-2 rounded-full text-white fill-current"
+              viewBox="0 0 512 512"
+              width="512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <g id="Solid">
+                <path d="m48 192h358.059l-39.03 39.029a24 24 0 0 0 33.942 33.942l80-80a24 24 0 0 0 0-33.942l-80-80a24 24 0 0 0 -33.942 33.942l39.03 39.029h-358.059a24 24 0 0 0 0 48z" />
+                <path d="m464 320h-358.059l39.03-39.029a24 24 0 0 0 -33.942-33.942l-80 80a24 24 0 0 0 0 33.942l80 80a24 24 0 0 0 33.942-33.942l-39.03-39.029h358.059a24 24 0 0 0 0-48z" />
+              </g>
+            </svg>
+          </div>
+          <div className="sm:flex-1 my-2">
             <ToInput
               to={to}
               setToHandler={this.setTo}
@@ -85,27 +99,13 @@ class App extends Component {
             ></ToInput>
           </div>
         </div>
-        <div className="flex justify-center my-4">
-          <svg
-            onClick={() => this.alterParams()}
-            className="w-10 h-10 cursor-pointer bg-red-600 p-2 rounded-full text-white fill-current"
-            viewBox="0 0 512 512"
-            width="512"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <g id="Solid">
-              <path d="m48 192h358.059l-39.03 39.029a24 24 0 0 0 33.942 33.942l80-80a24 24 0 0 0 0-33.942l-80-80a24 24 0 0 0 -33.942 33.942l39.03 39.029h-358.059a24 24 0 0 0 0 48z" />
-              <path d="m464 320h-358.059l39.03-39.029a24 24 0 0 0 -33.942-33.942l-80 80a24 24 0 0 0 0 33.942l80 80a24 24 0 0 0 33.942-33.942l-39.03-39.029h358.059a24 24 0 0 0 0-48z" />
-            </g>
-          </svg>
-        </div>
 
-        <div className="flex justify-center my-8">
+        <div className="flex justify-center my-8 px-3">
           <input
             value={amount}
             onChange={(e) => this.setState({ amount: e.target.value })}
             type="number"
-            className="w-3/4 sm:w-1/4 bg-white px-5 py-3 border rounded-lg font-semibold text-gray-700 focus:outline-none focus:shadow-outline"
+            className="w-3/4 sm:w-1/4 bg-white px-5 py-3 border rounded-lg font-semibold text-gray-600 focus:outline-none focus:shadow-outline"
             placeholder="Enter Amount"
           />
         </div>
@@ -125,7 +125,7 @@ class App extends Component {
         </div>
 
         <div className="flex justify-center">
-          <div className="text-5xl font-semibold text-gray-700">
+          <div className="text-5xl text-gray-700">
             <CountUp
               start={0}
               end={this.formattedResult()}
