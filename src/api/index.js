@@ -4,6 +4,10 @@ const url = "https://free.currencyconverterapi.com/api/v6";
 const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const getCurruncies = async () => {
+  const prevCurrencies = localStorage.getItem("currencies");
+  if (prevCurrencies) {
+    localStorage.removeItem("currencies");
+  }
   const currencies = localStorage.getItem("formatted_currencies");
   if (currencies) {
     const response = JSON.parse(currencies);
