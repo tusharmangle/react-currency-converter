@@ -7,8 +7,8 @@ import "./styles/tailwind.css";
 class App extends Component {
   state = {
     currencies: [],
-    to: "",
-    from: "",
+    to: null,
+    from: null,
     amount: null,
     result: 0,
     converting: false,
@@ -45,8 +45,10 @@ class App extends Component {
 
   async componentDidMount() {
     const currencies = await getCurruncies();
+    console.log(currencies);
     this.setState({ currencies: Object.values(currencies) });
   }
+
   handleDisable = () => {
     let classname =
       "bg-blue-600 text-white px-8 py-2 rounded tracking-wide text-lg font-semibold uppercase focus:outline-none ";

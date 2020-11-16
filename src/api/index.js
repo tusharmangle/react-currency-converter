@@ -11,7 +11,7 @@ export const getCurruncies = async () => {
   }
   const response = await axios.get(`${url}/currencies?apiKey=${API_KEY}`);
   localStorage.setItem("currencies", JSON.stringify(response.data.results));
-  return response;
+  return response.data.results;
 };
 
 export const convertCurrencies = async (from, to) => {
