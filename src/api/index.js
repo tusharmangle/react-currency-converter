@@ -10,12 +10,20 @@ export const getCurruncies = async () => {
     return response;
   }
   const response = await axios.get(`${url}/currencies?apiKey=${API_KEY}`);
-  localStorage.setItem("currencies", JSON.stringify(response.data.results));
-  return response.data.results;
+  const formattedValues = Object.values(response.data.results).map(
+    (currency) => {
+      return { value: currency.id, label: currency.currencyName };
+    }
+  );
+  localStorage.setItem("currencies", JSON.stringify(formattedValues));
+  console.log("Formatted Values", formattedValues);
+
+  return formattedValues;
 };
 
 export const convertCurrencies = async (from, to) => {
-  const key = `${from}_${to}`;
+  console.log(from, to);
+  const key = `${from.value}_${to.value}`;
   const response = await axios.get(`${url}/convert?q=${key}&apiKey=${API_KEY}`);
   return response.data.results[key].val;
 };

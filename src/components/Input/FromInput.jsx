@@ -1,4 +1,5 @@
 import React from 'react'
+import Select from 'react-select';
 
 const FromInput = ({currencies,setFromHandler, from}) => {
 
@@ -7,12 +8,13 @@ const FromInput = ({currencies,setFromHandler, from}) => {
     }
     return (
             <form className="px-5">
-                <select className=" w-full border px-5 py-3 font-semibold text-gray-600 rounded-lg focus:shadow-outline bg-white focus:outline-none" value={from} onChange={(e)=> setFromHandler(e.target.value)} >
-                    <option value="">From</option>
-                    {currencies.map(currency =><option value={currency.id}  key={currency.id}>{currency.currencyName}</option>)}
-                </select>
+                <Select
+                className="font-semibold text-gray-600"
+                    value={from}
+                    onChange={setFromHandler}
+                    options={currencies}
+                />
             </form>
-            
     )
 }
 

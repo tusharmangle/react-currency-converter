@@ -7,18 +7,24 @@ import "./styles/tailwind.css";
 class App extends Component {
   state = {
     currencies: [],
-    to: null,
-    from: null,
-    amount: null,
+    to: { value: "USD", label: "United States Dollar" },
+    from: { value: "INR", label: "Indian Rupee" },
+    amount: "",
     result: 0,
     converting: false,
   };
 
   setFrom = (value) => {
-    this.setState({ from: value, result: 0 });
+    this.setState({
+      from: { value: value.value, label: value.label },
+      result: 0,
+    });
   };
   setTo = (value) => {
-    this.setState({ to: value, result: 0 });
+    this.setState({
+      to: { value: value.value, label: value.label },
+      result: 0,
+    });
   };
   alterParams = async () => {
     const fromValue = { from: this.state.from, to: this.state.to }; //concept of value by reference
@@ -45,7 +51,6 @@ class App extends Component {
 
   async componentDidMount() {
     const currencies = await getCurruncies();
-    console.log(currencies);
     this.setState({ currencies: Object.values(currencies) });
   }
 
@@ -72,7 +77,7 @@ class App extends Component {
         </div>
 
         <div className="container mx-auto flex flex-col sm:flex-row flex-wrap items-center">
-          <div className="sm:flex-1 my-2">
+          <div className="w-full sm:flex-1 my-2">
             <FromInput
               currencies={currencies}
               from={from}
@@ -93,7 +98,7 @@ class App extends Component {
               </g>
             </svg>
           </div>
-          <div className="sm:flex-1 my-2">
+          <div className="w-full sm:flex-1 my-2">
             <ToInput
               to={to}
               setToHandler={this.setTo}
